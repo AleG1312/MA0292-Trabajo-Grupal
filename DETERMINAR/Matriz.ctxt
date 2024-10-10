@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Matriz
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Matriz\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Matriz\ here.\r\n\ \r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Matriz()
 comment2.params=
@@ -13,4 +13,8 @@ comment5.params=
 comment5.target=void\ generarResultados()
 comment6.params=
 comment6.target=void\ visualizarSistema()
-numComments=7
+comment7.params=array
+comment7.target=boolean\ esHomogeneo(int[])
+comment8.params=matriz
+comment8.target=int\ calcularDeterminante(int[][])
+numComments=9

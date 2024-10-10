@@ -29,13 +29,17 @@ public class Matriz {
 
         int tamañoFilas = this.sistema.length;
         int tamañoColumnas = this.sistema[0].length;
-
-        // Relleno los coeficientes
-        for (int i = 0; i < tamañoFilas; i++) {
-            for (int j = 0; j < (tamañoColumnas - 1); j++) {
-                this.sistema[i][j] = randomNum.nextInt(-10, 10);
+        
+        do{
+            // Relleno los coeficientes
+            for (int i = 0; i < tamañoFilas; i++) {
+                for (int j = 0; j < (tamañoColumnas - 1); j++) {
+                    this.sistema[i][j] = randomNum.nextInt(-10, 10);
+                }
             }
-        }
+        }while(calcularDeterminante(sistema) == 0);
+        
+        System.out.println("Determinante:" + calcularDeterminante(sistema));
     }
 
     // Genera el vector de resultados
@@ -89,5 +93,57 @@ public class Matriz {
             }
         }
         return homogeneo;
+    }
+
+    public int calcularDeterminante(int[][] matriz){
+        int[][] matrizSarrus = new int[3][5];
+        
+        //Copia el parametro y duplica la columna 1-2 en la 4-5 en un nuevo sistema.
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 5; j++){
+                if(j < 3){
+                    matrizSarrus[i][j] = matriz[i][j];    
+                }else{
+                    matrizSarrus[i][j] = matriz[i][j-3];
+                }
+                
+            }
+        }
+        
+        //Se encarga de calcular el determinante
+        int producto = 1;
+        int sumaUno = 0;
+        int sumaDos = 0;
+        int contador = 0;
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(i == 0){
+                    producto *= matrizSarrus[j][j];
+                }else if(i == 1){
+                    producto *= matrizSarrus[j][j+1];
+                }else{
+                    producto *= matrizSarrus[j][j+2];
+                }
+                
+            }
+            sumaUno += producto;
+            producto = 1;
+            for(int j = 2; j >= 0; j--){
+                if(j == 2){
+                    producto *= matrizSarrus[j][contador];
+                }else if(j == 1){
+                    producto *= matrizSarrus[j][contador+1];
+                }else{
+                    producto *= matrizSarrus[j][contador+2];
+                }
+                
+            }
+            sumaDos += producto;
+            producto = 1;
+            contador += 1;
+        }
+        
+        return (sumaUno - sumaDos);
+
     }
 }
