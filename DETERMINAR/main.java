@@ -13,24 +13,37 @@ public class main
     public static void main(String[] args) throws IOException, InterruptedException{
         Scanner input = new Scanner(System.in);
         Matriz matriz = new Matriz();
-        while (true){
-            System.out.println("Se generan los coeficientes");
-            matriz.generarCoeficientes();
-            matriz.visualizarSistema();
-            System.out.println("Se genera el vector de resultados");
-            matriz.generarResultados();
+        
+        boolean generarNuevaMatriz = true;
+        while (generarNuevaMatriz){
+            matriz.generarMatrizCoeficientes();     //Se generan los coeficientes:
+            matriz.generarVectorResultados();       //Se genera el vector de resultados:
+            //Se muestran los resultados en pantalla:
+            System.out.println("Determinante:" + matriz.calcularDeterminante());
             matriz.visualizarSistema();
 
-            System.out.println("Desea salir (1:Si, 2:No)");
-            int eleccion = input.nextInt();
-            if (eleccion == 1){
-                break;
-            }
-            
-            //"Reinicio" el sistema para repetir el proceso
-            matriz.setSistema(new int[3][4]);
-            //Limpio la pantalla
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            boolean eleccionValida = false;
+            do{     //Ciclo para aceptar únicamente las respuestas esperadas en cuanto a generar otra matriz o no
+                System.out.println("¿Desea generar otra matriz? (1:Si, 2:No)");
+                int eleccion = input.nextInt();
+                switch(eleccion){
+                    case 1:
+                        matriz.setSistema(new int[3][4]);   //"Reinicio" el sistema para repetir el proceso
+                        eleccionValida = true;
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();   //Limpio la pantalla
+                        break;
+                    case 2:
+                        eleccionValida = true;
+                        generarNuevaMatriz = false;
+                        break;
+                    default:
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();   //Limpio la pantalla
+                        System.out.println("Determinante:" + matriz.calcularDeterminante());
+                        matriz.visualizarSistema();
+                        System.out.println("\nPor favor ingrese una opción válida.\n");
+                        break;
+                }
+            }while(!eleccionValida);
         }
     }
 }

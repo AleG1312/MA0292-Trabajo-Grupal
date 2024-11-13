@@ -14,49 +14,45 @@ public class Matriz {
     public Matriz() {
         sistema = new int[3][4];
     }
-
+    
+    //Setters y getters
     public int[][] getSistema() {
         return this.sistema;
     }
-
     public void setSistema(int[][] sistema) {
         this.sistema = sistema;
     }
 
-    // Genero los coeficientes de la matriz
-    public void generarCoeficientes() {
+    // Genero la matriz de coeficientes
+    public void generarMatrizCoeficientes() {
         Random randomNum = new Random();
 
         int tamañoFilas = this.sistema.length;
         int tamañoColumnas = this.sistema[0].length;
         
-        do{
-            // Relleno los coeficientes
+        do{     //Relleno la matriz de coeficientes
             for (int i = 0; i < tamañoFilas; i++) {
                 for (int j = 0; j < (tamañoColumnas - 1); j++) {
                     this.sistema[i][j] = randomNum.nextInt(-10, 10);
                 }
             }
-        }while(calcularDeterminante(sistema) == 0);
-        
-        System.out.println("Determinante:" + calcularDeterminante(sistema));
+        }while(calcularDeterminante() == 0);    //Si el determinante de la matriz generada es cero, volver a realizar el proceso
     }
 
     // Genera el vector de resultados
-    public void generarResultados() {
+    public void generarVectorResultados() {
         Random randomNum = new Random();
 
         int tamañoFilas = this.sistema.length;
         int ultimaColumna = this.sistema[0].length - 1;
         int[] resultados = new int[3];
-        // Relleno la última columna
-        for (int i = 0; i < tamañoFilas; i++) {
-            this.sistema[i][ultimaColumna] = randomNum.nextInt(-10, 10);
-
-            resultados[i] = this.sistema[i][ultimaColumna];
-        }
-        // TODO: generar un nuevo array si esHomogeneo(resultados); retorna true
-        esHomogeneo(resultados);
+        do{     //Genero el vector de resultados
+            for (int i = 0; i < tamañoFilas; i++) {
+                int random = randomNum.nextInt(-10, 10);    //Genero mi número aleatorio
+                this.sistema[i][ultimaColumna] = random;    //Agrego el número a mi sistema
+                resultados[i] = random;                     //Lo agrego a mi vector de resultados para su posterior análisis
+            }
+        }while(esNulo(resultados));    //Si el vector de resultados es nulo, volver a realizar el proceso
     }
 
     // Para visualizar el sistema de ecuaciones
@@ -84,29 +80,29 @@ public class Matriz {
         }
     }
 
-    // Verifica si el sistema es homogeneo
-    public boolean esHomogeneo(int[] array) {
-        boolean homogeneo = true;
+    // Verifica si un vector es nulo (todas sus entradas son cero)
+    public boolean esNulo(int[] array) {
+        boolean nulo = true;    //Se asume que es nulo
         for (int i = 0; i < array.length; i++) {
-            if (array[i] != 0) {
-                homogeneo = false;
+            if (array[i] != 0) {    //Si alguna componente es distinta de cero, el vector no es nulo
+                nulo = false;
+                return nulo;
             }
         }
-        return homogeneo;
+        return nulo;
     }
 
-    public int calcularDeterminante(int[][] matriz){
+    public int calcularDeterminante(){
         int[][] matrizSarrus = new int[3][5];
         
         //Copia el parametro y duplica la columna 1-2 en la 4-5 en un nuevo sistema.
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 5; j++){
                 if(j < 3){
-                    matrizSarrus[i][j] = matriz[i][j];    
+                    matrizSarrus[i][j] = this.sistema[i][j];    
                 }else{
-                    matrizSarrus[i][j] = matriz[i][j-3];
+                    matrizSarrus[i][j] = this.sistema[i][j-3];
                 }
-                
             }
         }
         
@@ -124,7 +120,6 @@ public class Matriz {
                 }else{
                     producto *= matrizSarrus[j][j+2];
                 }
-                
             }
             sumaUno += producto;
             producto = 1;
@@ -142,8 +137,6 @@ public class Matriz {
             producto = 1;
             contador += 1;
         }
-        
         return (sumaUno - sumaDos);
-
     }
 }
