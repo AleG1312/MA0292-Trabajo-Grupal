@@ -46,5 +46,8 @@ public class main {
                 }
             } while (!eleccionValida);
         }
+        //Ya en este punto tenemos la matriz final con la que empezaremos el juego
+        Jugador jugador1 = new Jugador();
+        jugador1.recibirComponentes();
     }
 }
