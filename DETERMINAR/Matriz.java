@@ -139,4 +139,10 @@ public class Matriz {
         }
         return (sumaUno - sumaDos);
     }
+    public void cambiarEntrada(int[] parametros){
+        int filaPorCambiar = parametros[0];
+        int columnaPorCambiar = parametros[1];
+        int valorNuevo = parametros[2];
+        this.sistema[filaPorCambiar][columnaPorCambiar] = valorNuevo;
+    }
 }

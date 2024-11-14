@@ -17,4 +17,6 @@ comment7.params=array
 comment7.target=boolean\ esNulo(int[])
 comment8.params=
 comment8.target=int\ calcularDeterminante()
-numComments=9
+comment9.params=parametros
+comment9.target=void\ cambiarEntrada(int[])
+numComments=10
