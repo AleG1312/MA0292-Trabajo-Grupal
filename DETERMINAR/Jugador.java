@@ -1,16 +1,32 @@
 import java.util.Scanner;
-/**
- * Write a description of class Jugador here.
- * 
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Jugador {
-    public Jugador(){
-        
+    //Atributos:
+    private String nombre;
+    private boolean turnoActivo;
+
+    //Método constructor:
+    public Jugador(String nombre){
+        this.nombre = nombre;
+        this.turnoActivo = true;
     }
+
+    //Setters y getters:
+    public String getNombre(){
+        return this.nombre;
+    }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    public boolean esTurnoActivo(){
+        return this.turnoActivo;
+    }
+    public void setTurnoActivo(boolean turnoActivo){
+        this.turnoActivo = turnoActivo;
+    }
+
     // Solicita fila, columna y valor para una matriz
-    public int[] recibirComponentes() {
+    public int[] solicitarComponentes() {
         Scanner input = new Scanner(System.in);
         int[] componentes = new int[3];
         System.out.print("Ingrese la fila: (0,2): ");

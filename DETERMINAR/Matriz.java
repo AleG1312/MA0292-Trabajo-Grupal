@@ -1,27 +1,28 @@
 import java.util.Random;
 
-/**
- * Write a description of class Matriz here.
- * 
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Matriz {
-    // instance variables - replace the example below with your own
+    //Atributos
     private int[][] sistema;
+    private int determinante;
 
     // Método constructor
     public Matriz() {
-        sistema = new int[3][4];
+        this.sistema = new int[3][4];        //Cada entrada se inicializa en 0
+        this.determinante = calcularDeterminante();
     }
-
     // Setters y getters
     public int[][] getSistema() {
         return this.sistema;
     }
-
     public void setSistema(int[][] sistema) {
         this.sistema = sistema;
+        this.determinante = calcularDeterminante();
+    }
+    public int getDeterminante(){
+        return this.determinante;
+    }
+    public void setDeterminante(int determinante){
+        this.determinante = determinante;
     }
 
     // Genero la matriz de coeficientes
@@ -37,10 +38,9 @@ public class Matriz {
                     this.sistema[i][j] = randomNum.nextInt(-10, 10);
                 }
             }
-        } while (calcularDeterminante() == 0); // Si el determinante de la matriz generada es cero, volver a realizar el
-                                               // proceso
+        } while (calcularDeterminante() == 0); // Si el determinante de la matriz generada es cero, volver a realizar el proceso
+        setDeterminante(calcularDeterminante());
     }
-
     // Genera el vector de resultados
     public void generarVectorResultados() {
         Random randomNum = new Random();
@@ -56,30 +56,35 @@ public class Matriz {
             }
         } while (esNulo(resultados)); // Si el vector de resultados es nulo, volver a realizar el proceso
     }
+    //Generar matriz
+    public void generarMatriz(){
+        generarMatrizCoeficientes();    // Se generan los coeficientes:
+        generarVectorResultados();      // Se genera el vector de resultados:
+    }
 
     // Para visualizar el sistema de ecuaciones
-    public void visualizarSistema() {
-        String linea;
+    public void detalles(String nombre){
+        System.out.println(nombre);
         for (int i = 0; i < this.sistema.length; i++) {
-            linea = "";
             for (int j = 0; j < this.sistema[0].length; j++) {
                 switch (j) {
                     case 0:
-                        linea += "(" + this.sistema[i][j] + ",";
+                        System.out.printf("(%3d", this.sistema[i][j]);
                         break;
                     case 1:
-                        linea += this.sistema[i][j] + ",";
+                    System.out.printf("%5d", this.sistema[i][j]);
                         break;
                     case 2:
-                        linea += this.sistema[i][j] + "|";
+                    System.out.printf("%5d  |", this.sistema[i][j]);
                         break;
                     case 3:
-                        linea += this.sistema[i][j] + ")";
+                        System.out.printf("%4d)", this.sistema[i][j]);
                         break;
                 }
             }
-            System.out.println(linea);
+            System.out.println();
         }
+        System.out.println("El determinante asociado es: " + this.determinante);
     }
 
     // Verifica si un vector es nulo (todas sus entradas son cero)
@@ -107,7 +112,6 @@ public class Matriz {
                 }
             }
         }
-
         // Se encarga de calcular el determinante
         int producto = 1;
         int sumaUno = 0;
@@ -133,7 +137,6 @@ public class Matriz {
                 } else {
                     producto *= matrizSarrus[j][contador + 2];
                 }
-
             }
             sumaDos += producto;
             producto = 1;
@@ -141,10 +144,22 @@ public class Matriz {
         }
         return (sumaUno - sumaDos);
     }
+    
     public void cambiarEntrada(int[] parametros){
         int filaPorCambiar = parametros[0];
         int columnaPorCambiar = parametros[1];
         int valorNuevo = parametros[2];
         this.sistema[filaPorCambiar][columnaPorCambiar] = valorNuevo;
+        //Se recalcula el determinante automáticamente
+        this.determinante = calcularDeterminante();
+    }
+
+    public void mapearDatos(int[][] sistema){
+        for (int i = 0; i < sistema.length; i++) {
+            for (int j = 0; j < sistema[0].length; j++) {
+                this.sistema[i][j] = sistema[i][j];
+            }
+        }
+        this.determinante = calcularDeterminante();
     }
 }
