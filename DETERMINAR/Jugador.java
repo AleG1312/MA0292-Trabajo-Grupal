@@ -35,6 +35,7 @@ public class Jugador {
         componentes[1] = input.nextInt();
         System.out.print("Ingrese el valor: (-10,10): ");
         componentes[2] = input.nextInt();
+        input.close();
         return componentes;
     }
 }
