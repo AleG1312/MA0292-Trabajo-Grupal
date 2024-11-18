@@ -4,7 +4,12 @@ public class Jugador {
     //Atributos:
     private String nombre;
     private boolean turnoActivo;
-
+    
+    /**
+     * Agregar atributo de puntaje total, con sus setters y getters respectivos
+     * Agregar una función de calcular puntaje total, que reciba como parámetro un determinante y cumpla con las condiciones del proyecto (punto c)
+     */
+    
     //Método constructor:
     public Jugador(String nombre){
         this.nombre = nombre;
@@ -29,6 +34,13 @@ public class Jugador {
     public int[] solicitarComponentes() {
         Scanner input = new Scanner(System.in);
         int[] componentes = new int[3];
+        /**
+         * Para cada entrada, hacer un ciclo que me impida aceptar respuestas fuera de los parámetros, ejemplo:
+         *              do{  
+         *                  System.out.print("Ingrese la fila: (0,2): ");
+         *                  componentes[0] = input.nextInt();
+         *              }while(componentes[0]<0 || componentes[0]>2)
+         */
         System.out.print("Ingrese la fila: (0,2): ");
         componentes[0] = input.nextInt();
         System.out.print("Ingrese la columna: (0,2): ");

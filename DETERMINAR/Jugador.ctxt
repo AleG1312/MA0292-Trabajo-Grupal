@@ -2,6 +2,7 @@
 comment0.target=Jugador
 comment1.params=nombre
 comment1.target=Jugador(java.lang.String)
+comment1.text=\r\n\ Agregar\ atributo\ de\ puntaje\ total,\ con\ sus\ setters\ y\ getters\ respectivos\r\n\ Agregar\ una\ funci\u00F3n\ de\ calcular\ puntaje\ total,\ que\ reciba\ como\ par\u00E1metro\ un\ determinante\ y\ cumpla\ con\ las\ condiciones\ del\ proyecto\ (punto\ c)\r\n
 comment2.params=
 comment2.target=java.lang.String\ getNombre()
 comment3.params=nombre

@@ -49,6 +49,12 @@ public class main {
                         
                         determinanteAnterior = determinanteActual;
                     }while(repiteTurno);
+                    /**
+                     * Agregar aquí la función de calcular puntaje y recibir como parámetro al determinanteActual, ejemplo:
+                     *          'jugador.recalcularPuntaje(determinanteActual)'
+                     * También, agregar un print para visualizar el puntaje del jugador, ejemplo:
+                     *          'jugador.getNombre() + "Puntaje total = " + jugador.getPuntaje()
+                     */
                 }
                 else{  //Si el jugador no está vivo
                     System.out.println("\n------------------Ronda: " + ronda + "  |  " + jugador.getNombre() + "------------------");
@@ -56,7 +62,7 @@ public class main {
                     jugador.setTurnoActivo(true);   //Si no está vivo en el turno actual, lo estará en el siguiente
                 }
                 iteracion ++;
-                System.out.println("nIngrese 'enter' para pasar a la siguiente ronda");
+                System.out.println("\nIngrese 'enter' para pasar a la siguiente ronda");
                 input.nextLine();
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Limpio la pantalla
             }
