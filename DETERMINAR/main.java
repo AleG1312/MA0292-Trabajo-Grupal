@@ -68,7 +68,7 @@ public class main {
             }
         }
         System.out.println("Fin del juego");
-        input.close();
+        //input.close();
     }
 
     private static Matriz definirMatrizInicial() throws IOException, InterruptedException {
@@ -98,7 +98,7 @@ public class main {
             }
         } while (eleccion != 2);
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Limpio la pantalla
-        input.close();
+        //input.close();
         return matriz;
     }
 

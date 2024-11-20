@@ -100,7 +100,7 @@ public class Jugador {
             }
         } while (reintentar);
 
-        input.close();
+        //input.close();
 
         return componentes;
     }
