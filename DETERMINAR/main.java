@@ -3,6 +3,12 @@
 import java.util.Scanner;
 //Ingreso la librería para poder limpiar la pantalla en plena ejecución
 import java.io.IOException;
+/**
+ * Clase: main
+ * 
+ * Descripción: Se encarga de la lógica del juego en sí. Crea ojetos Jugador y objetos Matriz. 
+ * Además, se implementan métodos adicionales necesarios para un mejor entendimiento y segmentación del código.
+ */
 
 public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -34,7 +40,7 @@ public class main {
         int determinanteOriginal = matrizOriginal.getDeterminante(); //Defino el determinante original
         int determinanteAnterior = determinanteOriginal;    //Defino el determinante Anterior
 
-        int rondas = 1; // Número de rondas
+        int rondas = 5; // Número de rondas
         int iteracion = 0;  //Identificador para agregar números a la lista de determinantes
 
 
@@ -146,6 +152,7 @@ public class main {
         //input.close();
     }
 
+    //Para establecer la matriz original con la que comenzaremos el juego
     private static Matriz definirMatrizInicial() throws IOException, InterruptedException {
         Scanner input = new Scanner(System.in);
         Matriz matriz = new Matriz();
@@ -177,6 +184,7 @@ public class main {
         return matriz;
     }
 
+    //Para realizar el cambio de una entrada de la matriz
     private static int[] jugada(int ronda, Jugador jugador, Matriz matrizEnModificacion, int[] determinantes,
             int iteracion) { // Esta función se encarga únicamente de realizar la jugada
         matrizEnModificacion.cambiarEntrada(jugador.solicitarComponentes()); // Cambio de entrada en la matriz
@@ -184,6 +192,7 @@ public class main {
         return determinantes;
     }
 
+    //Para analizar si el jugador en el turno actual repite, anula o continúa su siguiente turno
     private static boolean condicionSiguienteTurno(Jugador jugador, int determinanteActual, int determinanteAnterior,
             int determinanteOriginal, int[] determinantes, int indice) {
         boolean condicion1 = (determinanteActual == determinanteOriginal); // Determinante del turno actual igual al
@@ -212,6 +221,7 @@ public class main {
         return repiteTurno;
     }
 
+    //Para visualizar el "tablero" (Matriz original, Matriz en modificación y otros datos importantes)
     private static void visualizarTabero(Matriz matrizOriginal, Matriz matrizEnModificacion, int[] determinantes,
             int determinanteActual, int determinanteAnterior) {
         matrizOriginal.detalles("\nMatriz original: "); // Detalles de la matriz original
@@ -223,6 +233,7 @@ public class main {
         System.out.println("Determinante Anterior: " + determinanteAnterior);
     }
 
+    //Para imprimir la lista de determinantes
     private static void imprimirLista(String nombre, int[] lista) {
         System.out.println(nombre);
         String resultado = "";
@@ -233,6 +244,7 @@ public class main {
         System.out.println(resultado);
     }
 
+    //Para ver si un valor se encuentra en una lista o no
     private static boolean seEncuentra(int[] lista, int elemento, int posicion) {
         boolean seEncuentra = false;
         for (int i = 0; i < posicion; i++) {
@@ -244,13 +256,15 @@ public class main {
         return seEncuentra;
     }
     
+    //Para mostrar todos los puntajes de una forma ordenada
     private static void mostrarPuntajes(Jugador[] jugadores){
         for(Jugador jugador:jugadores){
-            System.out.println(jugador.getNombre() + ": " + jugador.getPuntajeTotal());
-            System.out.println("Ronda de puntaje: " + jugador.getRondaDePuntaje());
+            System.out.println("Puntaje de " + jugador.getNombre() + ": " + jugador.getPuntajeTotal());
+            System.out.println("Primera ronda en la que obtuvo el puntaje: " + jugador.getRondaDePuntaje());
         }
     }
     
+    //Para desplegar un ganador
     private static void desplegarGanador(Jugador[] jugadores){
         boolean todosNegativos = todosNegativos(jugadores);
         boolean huboEmpate = huboEmpate(jugadores);
@@ -274,6 +288,7 @@ public class main {
         }
     }
     
+   //Para identificar si todos los puntajes finales son negativos o no
     private static boolean todosNegativos(Jugador[] jugadores){
         boolean todosNegativos = true;
         for (Jugador jugador:jugadores){
@@ -285,12 +300,13 @@ public class main {
         return todosNegativos;
     }
     
+    //Para identificar si hubo un empate
     private static boolean huboEmpate(Jugador[] jugadores){
         //Identificamos caso de empate
         boolean huboEmpate = false;
         for(int i = 0; i < jugadores.length; i ++){
             for(int j = i+1; j < jugadores.length; j ++){
-                if(jugadores[i] == jugadores[j]){
+                if(jugadores[i].getPuntajeTotal() == jugadores[j].getPuntajeTotal()){
                     huboEmpate = true;
                 }
             }
@@ -298,6 +314,7 @@ public class main {
         return huboEmpate;
     }
     
+    //Para identificar si hubo un ganador en caso de empate
     private static void ganadorEmpate(Jugador[] jugadores, boolean todosNegativos){       
         /**
          * Para identificar a los que repitieron valor
@@ -342,9 +359,9 @@ public class main {
             if (jugadorDiferente.getPuntajeTotal() > jugadoresRepetidos[0].getPuntajeTotal()){
                 System.out.println("\nEl ganador ha sido: " + jugadorDiferente.getNombre());
             }else{
-                if(jugadoresRepetidos[0].getRondaDePuntaje() > jugadoresRepetidos[1].getRondaDePuntaje()){
+                if(jugadoresRepetidos[0].getRondaDePuntaje() < jugadoresRepetidos[1].getRondaDePuntaje()){
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[0].getNombre());
-                }else if(jugadoresRepetidos[1].getRondaDePuntaje() > jugadoresRepetidos[0].getRondaDePuntaje()){
+                }else if(jugadoresRepetidos[1].getRondaDePuntaje() < jugadoresRepetidos[0].getRondaDePuntaje()){
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[1].getNombre());
                 }else{
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[0].getNombre());

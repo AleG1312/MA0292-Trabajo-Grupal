@@ -1,17 +1,15 @@
 import java.util.Scanner;
-
+/**
+ * Clase Jugador
+ * 
+ * Descripción: Agrupa las características necesarias que debe tener el jugador en el juego
+ */
 public class Jugador {
     // Atributos:
     private String nombre;
-    private boolean turnoActivo;
+    private boolean turnoActivo;    //Corresponde a si el jugador juega en la ronda en la que está o no
     private int puntajeTotal;
-    private int rondaDePuntaje;
-
-    /**
-     * Agregar atributo de puntaje total, con sus setters y getters respectivos
-     * Agregar una función de calcular puntaje total, que reciba como parámetro un
-     * determinante y cumpla con las condiciones del proyecto (punto c)
-     */
+    private int rondaDePuntaje;     //Corresponde a la primera ronda en la que obtuve mi puntaje actual
 
     // Método constructor:
     public Jugador(String nombre) {
@@ -51,12 +49,16 @@ public class Jugador {
     public void setRondaDePuntaje(int rondaDePuntaje){
         this.rondaDePuntaje = rondaDePuntaje;
     }
+
+    //Para calcular la ronda de puntaje:
     public void calcularRondaDePuntaje(int ronda, int puntajeNuevo){
+        //Únicamente se actualiza si el puntaje nuevo es diferente al acumulado
         if(this.puntajeTotal != puntajeNuevo){
             this.rondaDePuntaje = ronda;
         }
     }
 
+    //Para calcular el puntaje según los requerimientos del proyecto:
     public int calcularPuntaje(int detTurno, int detOriginal) {
         int nuevoPuntaje = 0;
         if (detTurno > 0) {
@@ -71,7 +73,7 @@ public class Jugador {
 
     }
 
-    // Solicita fila, columna y valor para una matriz
+    //Para solicitar los componentes de fila, columna y valor
     public int[] solicitarComponentes() {
         Scanner input = new Scanner(System.in);
         int[] componentes = new int[3];
@@ -112,9 +114,6 @@ public class Jugador {
                 reintentar = false;
             }
         } while (reintentar);
-
-        //input.close();
-
         return componentes;
     }
 }

@@ -1,12 +1,11 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all they need to know. The comments should usually include at least:
-------------------------------------------------------------------------
+# MA0292-Trabajo-Grupal
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+Trabajo Grupal del curso de Álgebra lineal
+
+Cómo iniciar el proyecto: Correr el método main y seguir las instrucciones que se van desplegando en pantalla.
+
+Autores:
+        Juan Jose Porras Rodríguez (B86116)
+        Alejandro Guerra Rodríguez (C13451)
+
+Otras instrucciones: La documentación detallada se encuentra en el archivo de texto incluído en el zip donde se encontraba este proyecto.
