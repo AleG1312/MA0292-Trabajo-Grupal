@@ -5,6 +5,7 @@ public class Jugador {
     private String nombre;
     private boolean turnoActivo;
     private int puntajeTotal;
+    private int rondaDePuntaje;
 
     /**
      * Agregar atributo de puntaje total, con sus setters y getters respectivos
@@ -17,6 +18,7 @@ public class Jugador {
         this.nombre = nombre;
         this.turnoActivo = true;
         this.puntajeTotal = 0;
+        this.rondaDePuntaje = 0;
     }
 
     // Setters y getters:
@@ -42,6 +44,17 @@ public class Jugador {
 
     public void setPuntajeTotal(int puntajeTotal) {
         this.puntajeTotal = puntajeTotal;
+    }
+    public int getRondaDePuntaje(){
+        return this.rondaDePuntaje;
+    }
+    public void setRondaDePuntaje(int rondaDePuntaje){
+        this.rondaDePuntaje = rondaDePuntaje;
+    }
+    public void calcularRondaDePuntaje(int ronda, int puntajeNuevo){
+        if(this.puntajeTotal != puntajeNuevo){
+            this.rondaDePuntaje = ronda;
+        }
     }
 
     public int calcularPuntaje(int detTurno, int detOriginal) {
