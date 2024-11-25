@@ -13,6 +13,19 @@ import java.io.IOException;
 public class main {
     public static void main(String[] args) throws IOException, InterruptedException {
         /**
+         * Bloque #0: Creo a mis jugadores
+         */
+
+        Jugador jugador1 = new Jugador(); // Creo mis jugadores
+        Jugador jugador2 = new Jugador();
+        Jugador jugador3 = new Jugador();
+
+        Jugador[] jugadores = new Jugador[] { jugador1, jugador2, jugador3 }; // Creo un array con mis jugadores
+
+        establecerNombres(jugadores);
+
+
+        /**
          * Bloque #1: Escogencia de la matriz inicial
          */
         Scanner input = new Scanner(System.in);
@@ -29,12 +42,6 @@ public class main {
          */
         Matriz matrizEnModificacion = new Matriz(); // Será la matriz a la que se le harán las modificaciones
         matrizEnModificacion.mapearDatos(matrizOriginal.getSistema());  //Copio los datos de la matriz original a la matriz en modificacion. 
-        
-        Jugador jugador1 = new Jugador("Jugador 1"); // Creo mis jugadores
-        Jugador jugador2 = new Jugador("Jugador 2");
-        Jugador jugador3 = new Jugador("Jugador 3");
-
-        Jugador[] jugadores = new Jugador[] { jugador1, jugador2, jugador3 }; // Creo un array con mis jugadores
 
         int[] determinantes = new int[15]; // Creo mi lista de determinantes
         int determinanteOriginal = matrizOriginal.getDeterminante(); //Defino el determinante original
@@ -278,12 +285,14 @@ public class main {
                 : (jugadores[1].getPuntajeTotal() <= jugadores[2].getPuntajeTotal())? jugadores[1] : jugadores[2];
 
                 System.out.println("\nEl perdedor ha sido: " + perdedor.getNombre());
+                System.out.println("\n¡Lo lamentamos, ha perdido un 15% en la nota final del curso!");
             }else{
                 Jugador ganador = (jugadores[0].getPuntajeTotal() >= jugadores[1].getPuntajeTotal())?
                 (jugadores[0].getPuntajeTotal() >= jugadores[2].getPuntajeTotal())? jugadores[0] : jugadores[2]
                 : (jugadores[1].getPuntajeTotal() >= jugadores[2].getPuntajeTotal())? jugadores[1] : jugadores[2];
 
                 System.out.println("\nEl ganador ha sido: " + ganador.getNombre());
+                System.out.println("\n¡Felicidades, ha ganado un 10% en la nota final del curso!");
             }
         }
     }
@@ -343,13 +352,17 @@ public class main {
              */
             if (jugadorDiferente.getPuntajeTotal() < jugadoresRepetidos[0].getPuntajeTotal()){
                 System.out.println("\nEl perdedor ha sido: " + jugadorDiferente.getNombre());
+                System.out.println("\n¡Lo lamentamos, ha perdido un 15% en la nota final del curso!");
             }else{
                 if(jugadoresRepetidos[0].getRondaDePuntaje() < jugadoresRepetidos[1].getRondaDePuntaje()){
                     System.out.println("\nEl perdedor ha sido: " + jugadoresRepetidos[0].getNombre());
+                    System.out.println("\n¡Lo lamentamos, ha perdido un 15% en la nota final del curso!");
                 }else if(jugadoresRepetidos[1].getRondaDePuntaje() < jugadoresRepetidos[0].getRondaDePuntaje()){
                     System.out.println("\nEl perdedor ha sido: " + jugadoresRepetidos[1].getNombre());
+                    System.out.println("\n¡Lo lamentamos, ha perdido un 15% en la nota final del curso!");
                 }else{
                     System.out.println("\nEl perdedor ha sido: " + jugadoresRepetidos[0].getNombre());
+                    System.out.println("\n¡Lo lamentamos, ha perdido un 15% en la nota final del curso!");
                 }
             }
         }else{
@@ -358,15 +371,31 @@ public class main {
              */
             if (jugadorDiferente.getPuntajeTotal() > jugadoresRepetidos[0].getPuntajeTotal()){
                 System.out.println("\nEl ganador ha sido: " + jugadorDiferente.getNombre());
+                System.out.println("\n¡Felicidades, ha ganado un 10% en la nota final del curso!");
             }else{
                 if(jugadoresRepetidos[0].getRondaDePuntaje() < jugadoresRepetidos[1].getRondaDePuntaje()){
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[0].getNombre());
+                    System.out.println("\n¡Felicidades, ha ganado un 10% en la nota final del curso!");
                 }else if(jugadoresRepetidos[1].getRondaDePuntaje() < jugadoresRepetidos[0].getRondaDePuntaje()){
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[1].getNombre());
+                    System.out.println("\n¡Felicidades, ha ganado un 10% en la nota final del curso!");
                 }else{
                     System.out.println("\nEl ganador ha sido: " + jugadoresRepetidos[0].getNombre());
+                    System.out.println("\n¡Felicidades, ha ganado un 10% en la nota final del curso!");
                 }
             }
         }
     }
+
+    //Para establecer los nombres de los jugadores
+    private static void establecerNombres(Jugador[] jugadores){
+        Scanner input = new Scanner(System.in);
+
+        for(int i = 0; i < jugadores.length; i++){
+            System.out.println("Digite el nombre del jugador " + i + ":");
+            String nombre = input.nextLine();
+            jugadores[i].setNombre(nombre);
+        }
+    }
 }
+

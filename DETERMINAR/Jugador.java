@@ -12,8 +12,8 @@ public class Jugador {
     private int rondaDePuntaje;     //Corresponde a la primera ronda en la que obtuve mi puntaje actual
 
     // Método constructor:
-    public Jugador(String nombre) {
-        this.nombre = nombre;
+    public Jugador() {
+        this.nombre = "";
         this.turnoActivo = true;
         this.puntajeTotal = 0;
         this.rondaDePuntaje = 0;
